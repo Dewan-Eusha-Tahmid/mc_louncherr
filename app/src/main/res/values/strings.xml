@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">KG Bedrock Launcher</string>
+    <string name="launch_minecraft">Play Minecraft</string>
+    <string name="minecraft_not_installed">Minecraft Bedrock is not installed</string>
+    <string name="install_play_store">Install from Google Play</string>
+    <string name="installed_version">Installed Version: %1$s</string>
+</resources>

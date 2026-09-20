@@ -1,0 +1,7 @@
+{
+  "name": "KG Bedrock Launcher",
+  "description": "Comprehensive launcher, world manager, 3D custom model creator, skin manager, and companion tools for Minecraft Bedrock Edition.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
