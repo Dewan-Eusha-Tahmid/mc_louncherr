@@ -109,6 +109,7 @@ fun CaveViewerScreen(
                         val sinA = sin(angleRad).toFloat()
 
                         val layersToDraw = listOf(selectedY + 16f, selectedY, selectedY - 16f)
+                        val reusablePath = Path()
 
                         for (layerY in layersToDraw) {
                             val alpha = if (layerY == selectedY) 1.0f else 0.35f
@@ -140,15 +141,15 @@ fun CaveViewerScreen(
                                             else -> Color(0xFF475569) // Stone
                                         }.copy(alpha = alpha)
 
-                                        val blockPath = Path().apply {
-                                            val s = 10f * zoomScale
-                                            moveTo(isoX, isoY - s)
-                                            lineTo(isoX + s, isoY - s * 0.5f)
-                                            lineTo(isoX, isoY)
-                                            lineTo(isoX - s, isoY - s * 0.5f)
-                                            close()
-                                        }
-                                        drawPath(path = blockPath, color = blockColor)
+                                        val s = 10f * zoomScale
+                                        reusablePath.rewind()
+                                        reusablePath.moveTo(isoX, isoY - s)
+                                        reusablePath.lineTo(isoX + s, isoY - s * 0.5f)
+                                        reusablePath.lineTo(isoX, isoY)
+                                        reusablePath.lineTo(isoX - s, isoY - s * 0.5f)
+                                        reusablePath.close()
+
+                                        drawPath(path = reusablePath, color = blockColor)
                                     }
                                 }
                             }

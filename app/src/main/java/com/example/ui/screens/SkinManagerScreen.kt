@@ -158,6 +158,10 @@ fun SkinManagerScreen(
                             return Offset(cx + x1 * scale, cy + y2 * scale)
                         }
 
+                        val topPath = Path()
+                        val frontPath = Path()
+                        val sidePath = Path()
+
                         fun drawCube(
                             x: Float, y: Float, z: Float,
                             w: Float, h: Float, d: Float,
@@ -177,33 +181,30 @@ fun SkinManagerScreen(
                             val p011 = project(x - halfW, y + h, z + halfD)
 
                             // Draw Top Face
-                            val topPath = Path().apply {
-                                moveTo(p000.x, p000.y)
-                                lineTo(p100.x, p100.y)
-                                lineTo(p110.x, p110.y)
-                                lineTo(p010.x, p010.y)
-                                close()
-                            }
+                            topPath.rewind()
+                            topPath.moveTo(p000.x, p000.y)
+                            topPath.lineTo(p100.x, p100.y)
+                            topPath.lineTo(p110.x, p110.y)
+                            topPath.lineTo(p010.x, p010.y)
+                            topPath.close()
                             drawPath(topPath, topColor)
 
                             // Front face
-                            val frontPath = Path().apply {
-                                moveTo(p010.x, p010.y)
-                                lineTo(p110.x, p110.y)
-                                lineTo(p111.x, p111.y)
-                                lineTo(p011.x, p011.y)
-                                close()
-                            }
+                            frontPath.rewind()
+                            frontPath.moveTo(p010.x, p010.y)
+                            frontPath.lineTo(p110.x, p110.y)
+                            frontPath.lineTo(p111.x, p111.y)
+                            frontPath.lineTo(p011.x, p011.y)
+                            frontPath.close()
                             drawPath(frontPath, frontColor)
 
                             // Side face
-                            val sidePath = Path().apply {
-                                moveTo(p100.x, p100.y)
-                                lineTo(p101.x, p101.y)
-                                lineTo(p111.x, p111.y)
-                                lineTo(p110.x, p110.y)
-                                close()
-                            }
+                            sidePath.rewind()
+                            sidePath.moveTo(p100.x, p100.y)
+                            sidePath.lineTo(p101.x, p101.y)
+                            sidePath.lineTo(p111.x, p111.y)
+                            sidePath.lineTo(p110.x, p110.y)
+                            sidePath.close()
                             drawPath(sidePath, sideColor)
                         }
 

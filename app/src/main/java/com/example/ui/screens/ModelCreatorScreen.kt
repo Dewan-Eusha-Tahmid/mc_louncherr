@@ -202,6 +202,11 @@ fun ModelCreatorScreen(
                                     drawLine(gridColor, p3, p4, 1f)
                                 }
 
+                                // Reusable paths for face rendering
+                                val topPath = Path()
+                                val frontPath = Path()
+                                val sidePath = Path()
+
                                 // Draw all cubes in all bones
                                 project.bones.forEachIndexed { bIdx, bone ->
                                     bone.cubes.forEachIndexed { cIdx, cube ->
@@ -244,32 +249,29 @@ fun ModelCreatorScreen(
                                             drawLine(wireColor, p101, p111, 2f)
                                             drawLine(wireColor, p001, p011, 2f)
                                         } else {
-                                            // Fill faces
-                                            val topPath = Path().apply {
-                                                moveTo(p000.x, p000.y)
-                                                lineTo(p100.x, p100.y)
-                                                lineTo(p110.x, p110.y)
-                                                lineTo(p010.x, p010.y)
-                                                close()
-                                            }
+                                            // Fill faces with reused paths
+                                            topPath.rewind()
+                                            topPath.moveTo(p000.x, p000.y)
+                                            topPath.lineTo(p100.x, p100.y)
+                                            topPath.lineTo(p110.x, p110.y)
+                                            topPath.lineTo(p010.x, p010.y)
+                                            topPath.close()
                                             drawPath(topPath, topColor)
 
-                                            val frontPath = Path().apply {
-                                                moveTo(p010.x, p010.y)
-                                                lineTo(p110.x, p110.y)
-                                                lineTo(p111.x, p111.y)
-                                                lineTo(p011.x, p011.y)
-                                                close()
-                                            }
+                                            frontPath.rewind()
+                                            frontPath.moveTo(p010.x, p010.y)
+                                            frontPath.lineTo(p110.x, p110.y)
+                                            frontPath.lineTo(p111.x, p111.y)
+                                            frontPath.lineTo(p011.x, p011.y)
+                                            frontPath.close()
                                             drawPath(frontPath, frontColor)
 
-                                            val sidePath = Path().apply {
-                                                moveTo(p100.x, p100.y)
-                                                lineTo(p101.x, p101.y)
-                                                lineTo(p111.x, p111.y)
-                                                lineTo(p110.x, p110.y)
-                                                close()
-                                            }
+                                            sidePath.rewind()
+                                            sidePath.moveTo(p100.x, p100.y)
+                                            sidePath.lineTo(p101.x, p101.y)
+                                            sidePath.lineTo(p111.x, p111.y)
+                                            sidePath.lineTo(p110.x, p110.y)
+                                            sidePath.close()
                                             drawPath(sidePath, sideColor)
 
                                             // Outline

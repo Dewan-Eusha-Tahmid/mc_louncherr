@@ -228,6 +228,77 @@ fun SettingsScreen(
             }
         }
 
+        // System & Device Diagnostics Card
+        item {
+            GamingCard(borderColor = CyberCyan.copy(alpha = 0.3f)) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = "SYSTEM & ENGINE DIAGNOSTICS",
+                        color = CyberCyan,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 12.sp,
+                        letterSpacing = 1.sp
+                    )
+                    Icon(
+                        imageVector = Icons.Default.Memory,
+                        contentDescription = null,
+                        tint = CyberCyan,
+                        modifier = Modifier.size(18.dp)
+                    )
+                }
+                Spacer(modifier = Modifier.height(10.dp))
+
+                val runtime = Runtime.getRuntime()
+                val usedMemMb = (runtime.totalMemory() - runtime.freeMemory()) / (1024 * 1024)
+                val maxMemMb = runtime.maxMemory() / (1024 * 1024)
+                val androidVersion = android.os.Build.VERSION.RELEASE
+                val apiLevel = android.os.Build.VERSION.SDK_INT
+                val deviceModel = "${android.os.Build.MANUFACTURER.replaceFirstChar { it.uppercase() }} ${android.os.Build.MODEL}"
+
+                Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text("Device Hardware", color = TextSecondary, fontSize = 12.sp)
+                        Text(deviceModel, color = TextPrimary, fontWeight = FontWeight.SemiBold, fontSize = 12.sp)
+                    }
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text("Android OS", color = TextSecondary, fontSize = 12.sp)
+                        Text("Android $androidVersion (API $apiLevel)", color = TextPrimary, fontWeight = FontWeight.SemiBold, fontSize = 12.sp)
+                    }
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text("JVM Memory", color = TextSecondary, fontSize = 12.sp)
+                        Text("$usedMemMb MB / $maxMemMb MB Allocated", color = EmeraldGreen, fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                    }
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text("Canvas Hardware Accel", color = TextSecondary, fontSize = 12.sp)
+                        Text("Active (OpenGL ES / Skia)", color = CyberCyan, fontWeight = FontWeight.SemiBold, fontSize = 12.sp)
+                    }
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text("Storage Protocol", color = TextSecondary, fontSize = 12.sp)
+                        Text("Scoped Sandbox + FileProvider", color = TextPrimary, fontWeight = FontWeight.SemiBold, fontSize = 12.sp)
+                    }
+                }
+            }
+        }
+
         // Legal & Mojang Disclaimer Card
         item {
             GamingCard(borderColor = CardBorder) {
